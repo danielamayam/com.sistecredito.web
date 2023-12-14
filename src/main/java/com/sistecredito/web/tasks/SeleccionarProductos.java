@@ -42,10 +42,9 @@ public class SeleccionarProductos implements Task {
                     WaitUntil.the(LINK_TITLE.of(randomProduct.getText().trim()), isClickable()).forNoMoreThan(60).seconds(),
                     Click.on(LINK_TITLE.of(randomProduct.getText().trim()))
             );
-
-            actor.attemptsTo(WaitUntil.the(LBL_PRESIO_DESCUENTO, isVisible()).forNoMoreThan(60).seconds());
-            datosCarrito.put("precioDes",LBL_PRESIO_DESCUENTO.resolveFor(actor).isPresent() ? LBL_PRESIO_DESCUENTO.resolveFor(actor).getText().replace("$", "").replace(",", "").replace(".", "").trim() : 0);
-            datosCarrito.put("precio", LBL_PRESIO.resolveFor(actor).getText().replace("$", "").replace(",", "").replace(".", "").trim());
+            actor.attemptsTo(WaitUntil.the(LBL_PRESIO, isVisible()).forNoMoreThan(60).seconds());
+            datosCarrito.put("precio", LBL_PRESIO_DESCUENTO.resolveFor(actor).isPresent() ? LBL_PRESIO_DESCUENTO.resolveFor(actor).getText().replace("$", "").replace(",", "").replace(".", "").trim() : LBL_PRESIO.resolveFor(actor).getText().replace("$", "").replace(",", "").replace(".", "").trim());
+            datosCarrito.put("descuento",LBL_PORSENTAJE.resolveFor(actor).isPresent() ? LBL_PORSENTAJE.resolveFor(actor).getText().replace("-", "").replace("%", "").trim() : "0");
             int cantidadWeb = Integer.parseInt(LBL_CANTIDAD.resolveFor(actor).getText().replace(") Disponibles", "").replace("(", "").trim());
             int cant = (int) (Math.random() * cantidadWeb + 1);
             int nuevoValor = cant < 10 ? cant : 5;

@@ -14,7 +14,7 @@ import net.serenitybdd.screenplay.actors.OnStage;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
-public class CompraEnLuegopago {
+public class CompraEnLuegopagoStepdefinitions {
 
     @Given("que {string} se encuentra en la pagina web")
     public void navegueHastaLaWeb(String actor) {
@@ -39,6 +39,7 @@ public class CompraEnLuegopago {
         theActorInTheSpotlight().should(
                 seeThat(VerificarDescuento.on())
         );
+
         theActorInTheSpotlight().should(
                 seeThat(VerificarTotal.on())
         );

@@ -20,15 +20,26 @@ public class VerificarTotal implements Question<Boolean> {
         List<Map<String, Object>> nuevaTabla = theActorInTheSpotlight().recall("tabladatos");
         for (Map<String, Object> datosCarrito : nuevaTabla) {
             int cantidad = (int) datosCarrito.get("cantidad");
-            double precioDes = Double.parseDouble((String) datosCarrito.get("precioDes"));
-            double precio = Double.parseDouble((String) datosCarrito.get("precioDes"));
+            double descuento = Double.parseDouble((String) datosCarrito.get("descuento"));
+            double precio = Double.parseDouble((String) datosCarrito.get("precio"));
+
             double total = precio * cantidad;
-            double desc = precioDes * cantidad;
+            double desc = (precio * (descuento / 100.0)) * cantidad;
+
+            System.out.println("Descuento" + desc);
+            System.out.println("Pagar" + total);
+            System.out.println("------------");
+
             subTotal += total;
             totalDes += desc;
         }
+
+        System.out.println(subTotal +" "+ totalDes);
+
+        System.out.println(subTotal - totalDes);
+
         String totalWeb = LBL_TOTAL.resolveFor(actor).getText().replace("- $", "").replace(".", "").replace(",", "").trim();
-        String totalGeneralString = String.valueOf(format.format(subTotal - (subTotal - totalDes))).replace(".", "").replace(",", "");
+        String totalGeneralString = String.valueOf(format.format(subTotal - totalDes)).replace(".", "").replace(",", "");
         resultado = totalWeb.contains(totalGeneralString);
         if (!resultado) {
             throw new AssertionError("El total del carrito no es igual a la seleccionada\n" +

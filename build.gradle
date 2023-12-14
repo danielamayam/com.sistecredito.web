@@ -35,9 +35,7 @@ dependencies {
     testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: "6.0.0"
     implementation group: 'net.serenity-bdd', name: 'serenity-screenplay', version: "$rootProject.ext.serenityVersion"
     implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-webdriver', version: "$rootProject.ext.serenityVersion"
-    implementation group: 'net.serenity-bdd', name: 'serenity-junit', version: "$rootProject.ext.serenityVersion"
+    implementation group: 'net.serenity-bdd', name: 'serenity-junit5', version: '3.9.7'
     implementation group: 'net.serenity-bdd', name: 'serenity-core', version: "$rootProject.ext.serenityVersion"
     implementation group: 'net.serenity-bdd', name: 'serenity-report-resources', version: "$rootProject.ext.serenityVersion"
-    implementation group: 'org.mockito', name: 'mockito-core', version: '3.12.4'
-
 }

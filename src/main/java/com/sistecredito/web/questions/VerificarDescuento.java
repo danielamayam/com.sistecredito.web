@@ -17,15 +17,13 @@ public class VerificarDescuento implements Question<Boolean> {
         List<Map<String, Object>> nuevaTabla = theActorInTheSpotlight().recall("tabladatos");
         for (Map<String, Object> datosCarrito : nuevaTabla) {
             int cantidad = (int) datosCarrito.get("cantidad");
-            double precioDes = Double.parseDouble((String) datosCarrito.get("precioDes"));
-            double precio = Double.parseDouble((String) datosCarrito.get("precioDes"));
-            double total = precio * cantidad;
-            double desc = precioDes * cantidad;
+            double descuento = Double.parseDouble((String) datosCarrito.get("descuento"));
+            double precio = Double.parseDouble((String) datosCarrito.get("precio"));
+            double total = (precio * (descuento / 100.0)) * cantidad;
             subTotal += total;
-            totalDes += desc;
         }
         String totalWeb = LBL_DESCUENTO.resolveFor(actor).getText().replace("- $", "").replace(".", "").replace(",", "").trim();
-        String totalGeneralString = String.valueOf(format.format(subTotal - totalDes)).replace(".", "").replace(",", "");
+        String totalGeneralString = String.valueOf(format.format(subTotal)).replace(".", "").replace(",", "");
         resultado = totalWeb.contains(totalGeneralString);
         if (!resultado) {
             throw new AssertionError("El descuento del carrito no es igual a la seleccionada\n" +
