@@ -7,5 +7,5 @@ Feature: Integración compra de artículos
   @smokTest
   Scenario: QA realiza una compra de varios productos aleatorios
     Given que "Daniel" se encuentra en la pagina web
-    When selecciono 3 productos aleatoriamente
+    When selecciono 5 productos aleatoriamente
     Then válido los productos del carrito

@@ -22,22 +22,11 @@ public class VerificarTotal implements Question<Boolean> {
             int cantidad = (int) datosCarrito.get("cantidad");
             double descuento = Double.parseDouble((String) datosCarrito.get("descuento"));
             double precio = Double.parseDouble((String) datosCarrito.get("precio"));
-
             double total = precio * cantidad;
-            double desc = (precio * (descuento / 100.0)) * cantidad;
-
-            System.out.println("Descuento" + desc);
-            System.out.println("Pagar" + total);
-            System.out.println("------------");
-
+            double desc = (descuento > 0) ? (precio * (descuento / 100.0)) * cantidad : 0;
             subTotal += total;
             totalDes += desc;
         }
-
-        System.out.println(subTotal +" "+ totalDes);
-
-        System.out.println(subTotal - totalDes);
-
         String totalWeb = LBL_TOTAL.resolveFor(actor).getText().replace("- $", "").replace(".", "").replace(",", "").trim();
         String totalGeneralString = String.valueOf(format.format(subTotal - totalDes)).replace(".", "").replace(",", "");
         resultado = totalWeb.contains(totalGeneralString);

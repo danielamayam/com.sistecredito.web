@@ -13,13 +13,13 @@ public class VerificarDescuento implements Question<Boolean> {
     public Boolean answeredBy(Actor actor) {
         DecimalFormat format = new DecimalFormat("###,###");
         boolean resultado = false;
-        double subTotal = 0.0, totalDes = 0.0;
+        double subTotal = 0.0;
         List<Map<String, Object>> nuevaTabla = theActorInTheSpotlight().recall("tabladatos");
         for (Map<String, Object> datosCarrito : nuevaTabla) {
             int cantidad = (int) datosCarrito.get("cantidad");
             double descuento = Double.parseDouble((String) datosCarrito.get("descuento"));
             double precio = Double.parseDouble((String) datosCarrito.get("precio"));
-            double total = (precio * (descuento / 100.0)) * cantidad;
+            double total = (descuento > 0) ? (precio * (descuento / 100.0)) * cantidad : 0;
             subTotal += total;
         }
         String totalWeb = LBL_DESCUENTO.resolveFor(actor).getText().replace("- $", "").replace(".", "").replace(",", "").trim();
